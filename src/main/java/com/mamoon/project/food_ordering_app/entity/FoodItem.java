@@ -17,7 +17,7 @@ public class FoodItem {
     private Long id;
 
     private String name;
-    private BigDecimal price;
+    private Double price;
     private String category;
     private String description;
     private boolean available;
