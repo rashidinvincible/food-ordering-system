@@ -12,7 +12,7 @@ public class CartItemResponseDTO {
 
     Long foodItemId;
     String foodItemName;
-    Double foodItemPrice;
-   Long quantity;
-    Double subtotal;
+    BigDecimal foodItemPrice;
+    Long quantity;
+    BigDecimal subtotal;
 }

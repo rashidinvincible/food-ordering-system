@@ -5,6 +5,7 @@ import com.mamoon.project.food_ordering_app.dto.CustomerRequestDTO;
 import com.mamoon.project.food_ordering_app.dto.CustomerResponseDTO;
 import com.mamoon.project.food_ordering_app.repository.CustomerRepository;
 import com.mamoon.project.food_ordering_app.services.CustomerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerResponseDTO> createCustomer(@RequestBody CustomerRequestDTO customerRequestDTO){
+    public ResponseEntity<CustomerResponseDTO> createCustomer(@Valid @RequestBody CustomerRequestDTO customerRequestDTO){
         return new ResponseEntity<>(customerService.createCustomer(customerRequestDTO), HttpStatus.CREATED);
     }
 }

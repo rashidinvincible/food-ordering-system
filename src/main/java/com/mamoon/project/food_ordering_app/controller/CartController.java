@@ -4,6 +4,7 @@ package com.mamoon.project.food_ordering_app.controller;
 import com.mamoon.project.food_ordering_app.dto.CartItemRequestDTO;
 import com.mamoon.project.food_ordering_app.dto.CartResponseDTO;
 import com.mamoon.project.food_ordering_app.services.CartService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,13 @@ public class CartController {
     }
 
     @PostMapping("/{customerId}/items")
-    public ResponseEntity<CartResponseDTO> addItemToCart( @PathVariable Long customerId, @RequestBody CartItemRequestDTO request)
+    public ResponseEntity<CartResponseDTO> addItemToCart( @PathVariable Long customerId, @Valid @RequestBody CartItemRequestDTO request)
     {
         return new ResponseEntity<>(cartService.addItemToCart(customerId, request), HttpStatus.CREATED);
     }
 
     @PutMapping("/{customerId}/items")
-    public ResponseEntity<CartResponseDTO> updateItemQuantity(@PathVariable Long customerId, @RequestBody CartItemRequestDTO request)
+    public ResponseEntity<CartResponseDTO> updateItemQuantity(@PathVariable Long customerId, @Valid @RequestBody CartItemRequestDTO request)
     {
         return ResponseEntity.ok(cartService.updateItemQuantity(customerId, request));
     }

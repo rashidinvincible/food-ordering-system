@@ -17,12 +17,14 @@ public class FoodItem {
     private Long id;
 
     private String name;
-    private Double price;
+    private BigDecimal price;
     private String category;
     private String description;
     private boolean available;
 
     @OneToMany(mappedBy = "foodItem")
     private List<CartItem> cartItems = new ArrayList<>();
+
+
 
 }

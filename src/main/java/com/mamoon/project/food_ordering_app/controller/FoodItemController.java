@@ -5,6 +5,7 @@ import com.mamoon.project.food_ordering_app.dto.FoodItemRequestDTO;
 import com.mamoon.project.food_ordering_app.dto.FoodItemResponseDto;
 import com.mamoon.project.food_ordering_app.repository.FoodItemRepository;
 import com.mamoon.project.food_ordering_app.services.FoodItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class FoodItemController {
     }
 
     @PostMapping
-    public ResponseEntity<FoodItemResponseDto>  createFoodItem(@RequestBody FoodItemRequestDTO foodItemRequestDTO)
+    public ResponseEntity<FoodItemResponseDto>  createFoodItem(@Valid @RequestBody FoodItemRequestDTO foodItemRequestDTO)
     {
         FoodItemResponseDto foodItemResponseDto = foodItemService.createFoodItem(foodItemRequestDTO);
         return new ResponseEntity<>(foodItemResponseDto, HttpStatus.CREATED);
@@ -40,7 +41,7 @@ public class FoodItemController {
     }
 
     @PutMapping("/{foodItemId}")
-    public ResponseEntity<FoodItemResponseDto> updateFoodItemById(@PathVariable Long foodItemId, @RequestBody FoodItemRequestDTO foodItemRequestDTO)
+    public ResponseEntity<FoodItemResponseDto> updateFoodItemById(@PathVariable Long foodItemId, @Valid @RequestBody FoodItemRequestDTO foodItemRequestDTO)
     {
         return ResponseEntity.ok(foodItemService.updateFoodItemById(foodItemId, foodItemRequestDTO));
     }

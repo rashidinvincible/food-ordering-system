@@ -39,16 +39,18 @@ public class CartServiceImpl implements CartService {
                     dto.setFoodItemPrice(item.getFoodItem().getPrice());
                     dto.setQuantity(item.getQuantity());
 
-                    double subTotal = item.getFoodItem().getPrice() * item.getQuantity();
+                    BigDecimal subTotal = item.getFoodItem()
+                            .getPrice()
+                            .multiply(BigDecimal.valueOf(item.getQuantity()));
                     dto.setSubtotal(subTotal);
 
                     return dto;
                 })
                 .toList();
 
-        double totalAmount = itemResponses.stream()
-                .mapToDouble(CartItemResponseDTO::getSubtotal)
-                .sum();
+        BigDecimal totalAmount = itemResponses.stream()
+                .map(CartItemResponseDTO::getSubtotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         CartResponseDTO response = new CartResponseDTO();
         response.setCartId(cart.getId());
@@ -68,7 +70,7 @@ public class CartServiceImpl implements CartService {
             emptyResponse.setCartId(null);
             emptyResponse.setCustomerId(customerId);
             emptyResponse.setCartItems(new ArrayList<>());
-            emptyResponse.setTotalAmount(0.0);
+            emptyResponse.setTotalAmount(BigDecimal.valueOf(0.0));
 
             return emptyResponse;
         }
@@ -108,6 +110,7 @@ public class CartServiceImpl implements CartService {
             newItem.setCart(cart);
             newItem.setFoodItem(foodItem);
             newItem.setQuantity(cartItemRequestDTO.getQuantity());
+            newItem.setPriceAtAdd(foodItem.getPrice());
             cart.getItems().add(newItem);
         }
 

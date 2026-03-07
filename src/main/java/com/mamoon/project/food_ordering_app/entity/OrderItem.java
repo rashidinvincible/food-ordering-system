@@ -9,21 +9,23 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @Setter
-public class CartItem {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long quantity;
-
-    private BigDecimal priceAtAdd;
-
     @ManyToOne
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
+    @JoinColumn(name = "order_id", nullable = false)
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "food_item_id", nullable = false)
     private FoodItem foodItem;
+
+    private Long quantity;
+
+    private BigDecimal priceAtOrder;
+
+
 }

@@ -14,5 +14,5 @@ public class CartResponseDTO {
     Long cartId;
     Long customerId;
     List<CartItemResponseDTO> cartItems;
-    Double totalAmount;
+    BigDecimal totalAmount;
 }
